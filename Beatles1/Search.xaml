@@ -1,0 +1,64 @@
+﻿<phone:PhoneApplicationPage
+
+    x:Class="Beatles1.Search"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:ui="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="80"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <!--TitlePanel contains the name of the application and page title-->
+        <StackPanel Grid.Row="0" Margin="12,17,0,28">
+            <TextBlock Text="Search" Style="{StaticResource PhoneTextNormalStyle}"/>
+            <TextBox Text="Search for any song..." Name="SearchBox" GotFocus="SearchBox_OnGotFocus" LostFocus="SearchBox_OnLostFocus" KeyUp="SearchBox_OnKeyUp"></TextBox>
+            
+        </StackPanel>
+
+        <!--ContentPanel - place additional content here-->
+        <Grid x:Name="ContentPanel" Grid.Row="1" Margin="12,0,12,0">
+            <phone:LongListSelector  Margin="0,0,-12,0" x:Name="MainLongListSelector" ItemsSource="{Binding Items}" SelectionChanged="MainLongListSelector_SelectionChanged" >
+                <phone:LongListSelector.ItemTemplate>
+                    <DataTemplate>
+                        <Grid Margin="0,0,0,0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="60"></ColumnDefinition>
+                                <ColumnDefinition Width="Auto"></ColumnDefinition>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Column="0" Source="{Binding Image1}" Width="60" Height="60"></Image>
+                            <StackPanel Margin="0,0,0,17" Grid.Column="1" >
+                                <TextBlock Grid.Column="2" Text="{Binding LineOne}" TextWrapping="Wrap" Style="{StaticResource PhoneTextTitle2Style}"/>
+                                <TextBlock Text="{Binding LineTwo}" TextWrapping="Wrap" Margin="12,-6,12,0" Style="{StaticResource PhoneTextSubtleStyle}"/>
+                            </StackPanel>
+                        </Grid>
+                    </DataTemplate>
+                </phone:LongListSelector.ItemTemplate>
+            </phone:LongListSelector>
+        </Grid>
+        <ui:AdControl 
+         ApplicationId="6de5203b-52f8-4965-a704-190e81d95c6a" 
+         AdUnitId="181862" 
+         HorizontalAlignment="Left" 
+         Height="80" 
+        Grid.Row="2"
+         VerticalAlignment="Top" 
+    Name="AdControl"
+         Width="480"/>
+    </Grid>
+
+</phone:PhoneApplicationPage>

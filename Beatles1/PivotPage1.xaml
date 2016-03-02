@@ -1,0 +1,98 @@
+﻿<phone:PhoneApplicationPage 
+xmlns:UI="clr-namespace:Microsoft.Advertising.Mobile.UI;assembly=Microsoft.Advertising.Mobile.UI"    
+x:Class="Beatles1.PivotPage1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:adDuplex="clr-namespace:AdDuplex;assembly=AdDuplex.WindowsPhone"
+    d:DataContext="{d:DesignData SampleData/MainViewModelSampleData.xaml}"
+    mc:Ignorable="d"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait"  Orientation="Portrait"
+    shell:SystemTray.IsVisible="True">
+    
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+       
+        <Grid.RowDefinitions>
+            <RowDefinition></RowDefinition>
+            <RowDefinition Height="60"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+        </Grid.RowDefinitions >
+        <!--Pivot Control-->
+        
+        <phone:Pivot Title="{Binding LineOne}" Grid.Row="0">
+            <!--Pivot item one-->
+            <phone:PivotItem Header="Lyrics" >
+               <ScrollViewer>
+                <Grid>
+    <!--Added TextBlock control with formatted text.-->
+    <TextBlock
+       TextWrapping="Wrap"
+       Style="{StaticResource PhoneTextSmallStyle}" Text="{Binding Lyrics}">
+       
+  </TextBlock>
+</Grid>
+                </ScrollViewer>
+            </phone:PivotItem>
+
+            <!--Pivot item two-->
+            <phone:PivotItem Header="Trivia">
+                <ScrollViewer>
+                <Grid>
+                    <!--Added TextBlock control with formatted text.-->
+                    <TextBlock
+       TextWrapping="Wrap"
+       Style="{StaticResource PhoneTextSmallStyle}" Text="{Binding Trivia}">
+
+                    </TextBlock>
+                </Grid>
+    
+    </ScrollViewer>
+    </phone:PivotItem>
+            <phone:PivotItem Header="Personnel">
+<ScrollViewer>
+                <Grid>
+                    <!--Added TextBlock control with formatted text.-->
+                    <TextBlock
+       TextWrapping="Wrap"
+       Style="{StaticResource PhoneTextSmallStyle}" Text="{Binding Personnel}">
+
+                    </TextBlock>
+                </Grid>
+                </ScrollViewer>
+            </phone:PivotItem>
+            
+        </phone:Pivot>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                <ColumnDefinition Width="60"></ColumnDefinition>
+                </Grid.ColumnDefinitions>
+            <TextBlock Name="TrackNameBlock" Grid.Column="0" VerticalAlignment="Top" Style="{StaticResource PhoneTextTitle2Style}" Text="{Binding LineOne}" ></TextBlock>
+            <MediaElement MediaEnded="AudioElement_OnMediaEnded"  AutoPlay="True" Name="AudioElement" Source="{Binding AudioSrc}"></MediaElement>
+            <Image  Name="AudioImagePrev" Source="Images/appbar.control.rewind.png" Grid.Column="1" Height="50" Width="50" VerticalAlignment="Top" Tap="prevTrack"  ></Image>
+            <Image  Name="AudioImage" Source="Images/appbar.control.pause.png" Grid.Column="2" Height="50" Width="50" VerticalAlignment="Top" Tap="UIElement_OnTap"></Image>
+
+            <Image  Name="AudioImageNext" Source="Images/appbar.control.fastforward.png" Grid.Column="3" Height="50" Width="50" VerticalAlignment="Top" Tap="AudioElement_OnMediaEnded"></Image>
+           
+        </Grid>
+
+<UI:AdControl 
+         ApplicationId="6de5203b-52f8-4965-a704-190e81d95c6a" 
+         AdUnitId="181863" 
+         HorizontalAlignment="Left" 
+         Height="80" 
+        Grid.Row="2"
+         VerticalAlignment="Top" 
+    Name="AdControl"
+         Width="480"/>    </Grid>
+    
+</phone:PhoneApplicationPage>
